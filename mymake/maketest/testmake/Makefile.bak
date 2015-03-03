@@ -1,0 +1,7 @@
+main:main.o my.o you.o
+	g++ -o $@ $^
+objfiles="main.o my.o you.o"
+dep:$(objfiles) 
+	g++ -g -Wall main.cpp my/my.h you/you.h -o main.o
+	g++ -g -Wall my/my.cpp -o my.o
+	g++ -g -Wall you/you.cpp -o you.o

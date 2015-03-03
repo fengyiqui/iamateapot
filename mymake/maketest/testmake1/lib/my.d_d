@@ -1,0 +1,3 @@
+/mnt/shared/test/cpp/maketest/testmake1/lib/my.obj_d /mnt/shared/test/cpp/maketest/testmake1/lib/my.d_d: \
+ my.cpp my.h
+	g++ -DLINUX -Wall -g -D_DEBUG -o /mnt/shared/test/cpp/maketest/testmake1/lib/my.obj_d -c my.cpp
