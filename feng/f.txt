@@ -1,0 +1,3 @@
+nm 工具可以查看动态库和静态库的函数名
+
+ar rvf lib_name.a *.o or *.obj

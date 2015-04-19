@@ -1,0 +1,5 @@
+/mnt/share/workshop/iamateapot/feng/temp/debug/clistr/cli_str.s.obj_d /mnt/share/workshop/iamateapot/feng/temp/debug/clistr/cli_str.s.d_d: \
+ cli_str.cpp cli_str.h ../errhandle/errwrappedfunc.h \
+ ../wrappedfunc/wrappedfunc.h ../wrappedfunc/commonnetheaders.h \
+ ../wrappedfunc/../errhandle/errwrappedfunc.h
+	g++ -DLINUX -Wall -g -D_DEBUG -fPIC -o /mnt/share/workshop/iamateapot/feng/temp/debug/clistr/cli_str.s.obj_d -c cli_str.cpp

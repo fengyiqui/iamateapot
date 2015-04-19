@@ -1,0 +1,4 @@
+/mnt/share/workshop/iamateapot/feng/temp/debug/wrappedfunc/wrappedfuncstring.obj_d /mnt/share/workshop/iamateapot/feng/temp/debug/wrappedfunc/wrappedfuncstring.d_d: \
+ wrappedfuncstring.cpp wrappedfunc.h commonnetheaders.h \
+ ../errhandle/errwrappedfunc.h
+	g++ -DLINUX -Wall -g -D_DEBUG -o /mnt/share/workshop/iamateapot/feng/temp/debug/wrappedfunc/wrappedfuncstring.obj_d -c wrappedfuncstring.cpp
