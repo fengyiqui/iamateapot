@@ -4,6 +4,7 @@ SEARCHINCFILE	:= global_prj.make
 include $(makebasedir)/search_inc_file_$(SEARCHINCLVL).make
 
 include prj.make
+
 .PHONY:all dep dirs echo_t clean cleanobj cleandep cleantarget install
 #生成头文件搜索语法
 includedir := $(AdditionalIncludeDir)
@@ -156,18 +157,21 @@ dirs:dirint dirout
 	@echo "mkdirs is done ^^)"
 
 clean:cleantarget cleanobj cleandep
-	$(RM) *.$(SObjExt)
-	$(RM) *.$(SDepExt)
-	$(RM) *.$(ObjExt)
-	$(RM) *.$(DepExt)
+	@echo "clean is done ^^)"
+ifeq ($(OutputType),exe)
 cleantarget:
 	$(RM) $(OutDir)/$(TargetName)
+else
+cleantarget:
+	$(RM) $(OutDir)/$(TargetName)
+	$(RM) $(OutDir)/lib$(ProjectName)$(CfgTag).$(LibExtension)
+endif
 cleanobj:
-	$(RM) $(IntDir)/*.$(ObjExt)
-	$(RM) $(IntDir)/*.$(SObjExt)
+	$(RM) $(IntDir)/*.$(ObjExt)$(CfgTag)
+	$(RM) $(IntDir)/*.$(SObjExt)$(CfgTag)
 cleandep:
-	$(RM) $(IntDir)/*.$(DepExt)
-	$(RM) $(IntDir)/*.$(SDepExt)
+	$(RM) $(IntDir)/*.$(DepExt)$(CfgTag)
+	$(RM) $(IntDir)/*.$(SDepExt)$(CfgTag)
 #安装文件
 ifeq ($(OutputType),exe)
 install:
@@ -197,4 +201,4 @@ echo_t:
 	@echo "alldenpendencies := $(alldenpendencies)"
 	@echo "AdditionalDependencies := $(AdditionalDependencies)"
 	@echo "alladditioanlibrary := $(alladditioanlibrary)"
-
+	@echo "CfgTag := $(CfgTag) LibExtension=$(LibExtension)"
