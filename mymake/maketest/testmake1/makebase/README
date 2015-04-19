@@ -1,0 +1,5 @@
+1. define shell variable makebasedir
+	makebasedir=/mnt/share/workshop/iamateapot/mymake/maketest/testmake1/makebase
+	export makebasedir
+2. alias mkdbg='$makebasedir/make_debug.make'
+3. set $makebasedir/global_prj.make : SolutionDir
