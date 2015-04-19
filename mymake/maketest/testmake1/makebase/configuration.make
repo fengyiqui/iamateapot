@@ -76,3 +76,5 @@ CCFlag := -Wall -g -D_DEBUG
 #CCFlag := -finput-charset=gb2312 -Wall -g -D_DEBUG
 # 连接选项
 LNFlag := -lpthread
+#mk使用
+SEARCHINCLVL := 8

@@ -1,4 +1,8 @@
-include $(makebasedir)/global_prj.make
+#include $(makebasedir)/global_prj.make
+#用search替代直接include
+SEARCHINCFILE	:= global_prj.make
+include $(makebasedir)/search_inc_file_$(SEARCHINCLVL).make
+
 include prj.make
 .PHONY:all dep dirs echo_t clean cleanobj cleandep cleantarget install
 #生成头文件搜索语法
