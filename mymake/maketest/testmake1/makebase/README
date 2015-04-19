@@ -3,3 +3,4 @@
 	export makebasedir
 2. alias mkdbg='$makebasedir/make_debug.make'
 3. set $makebasedir/global_prj.make : SolutionDir
+4. 只支持一个目标
