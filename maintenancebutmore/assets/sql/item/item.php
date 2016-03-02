@@ -209,7 +209,6 @@ function make_sql_guild_league_by_charid($char_id)
 }
 function make_sql_guild_league_guild_members_by_charid($char_id)
 {
-    $tmp_str=wrap_str($char_name);
     $sql = "select guild_id,guild_league_id,contribution,data "
         . "from guild_league_guild_members where guild_id in (select guild_id from common_characters where char_id in (".$char_id."));";
     return $sql;

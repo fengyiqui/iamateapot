@@ -26,9 +26,9 @@ if("" != @$_POST["acct"] || "" != @$_POST["char_name"] || "" != @$_POST["char_id
     }
     if("" != @$_POST["char_name"])
     {
-        $sql = make_sql_guild_league_guild_members_by_charname($_POST["char_name"]);
-        $sql2 = make_sql_guild_league_guild_members_by_charname($_POST["char_name"]);
-        $sql3 = make_sql_common_characters_by_charname($_POST["char_name"]);
+        $sql = make_sql_common_characters_by_charname($_POST["char_name"]);
+        $sql2 = make_sql_guild_league_by_charname($_POST["char_name"]);
+        $sql3 = make_sql_guild_league_guild_members_by_charname($_POST["char_name"]);
         $sql4 = make_sql_guild_league_members_by_charname($_POST["char_name"]);
         echo("<br/>");
         echo($sql);
@@ -42,9 +42,9 @@ if("" != @$_POST["acct"] || "" != @$_POST["char_name"] || "" != @$_POST["char_id
     }
     if("" != @$_POST["char_id"])
     {
-        $sql = make_sql_guild_league_guild_members_by_charid($_POST["char_id"]);
-        $sql2 = make_sql_guild_league_guild_members_by_charid($_POST["char_id"]);
-        $sql3 = make_sql_common_characters_by_charid($_POST["char_id"]);
+        $sql = make_sql_common_characters_by_charid($_POST["char_id"]);
+        $sql2 = make_sql_guild_league_by_charid($_POST["char_id"]);
+        $sql3 = make_sql_guild_league_guild_members_by_charid($_POST["char_id"]);
         $sql4 = make_sql_guild_league_members_by_charid($_POST["char_id"]);
         echo("<br/>");
         echo($sql);
