@@ -25,5 +25,9 @@ i am a teapot, fat and round!!!;
     <a href="assets/token/chg_xianyu_for_qq.php" >仙玉chg</a><br/>
     <a href="assets/token/mny_sub_add.php" >道具获得+丢失</a><br/>
 </p>
+<p>
+    <b>联盟<br/></b>
+    <a href="assets/league/league.php" >联盟各种</a><br/>
+</p>
 </body>
 </html>

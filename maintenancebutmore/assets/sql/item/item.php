@@ -20,6 +20,12 @@ function wrap_str($str,$delimiter=",",$new_delimiter=",",$wrap_str="'")
     }
     return $tmp_str;
 }
+//统一查询
+function    make_sql_acct($acct)
+{
+    $sql = "select a.name,a.account_id,c.name,c.char_id from common_accounts a, common_characters c where a.account_id = c.account_id and a.name = '".$acct."'";
+    return $sql;
+}
 //道具类
 function make_sql_item($datetime1,$datetime2,$acct,$char_name,$item_id,$table_name)
 {
@@ -160,5 +166,56 @@ function make_sql_chg_xianyu_for_qq($datetime1,$datetime2,$acct,$char_name,$case
     }
     $sql.=";";
 
+    return $sql;
+}
+//league查询
+function make_sql_common_characters_by_charname($char_name)
+{
+    $tmp_str=wrap_str($char_name);
+    $sql = "select name,char_id,guild_id,league_status,league_name,league_svrid from common_characters where name in (".$tmp_str."); ";
+    return $sql;
+}
+function make_sql_guild_league_by_charname($char_name)
+{
+    $tmp_str=wrap_str($char_name);
+    $sql = "select guild_league_id,srv_id,status,build_time,temp_time,level,size,money,credit,action,scn_id,name,leader "
+            . "from guild_league where guild_league_id in (select guild_league_id from common_characters where name in (".$tmp_str."));";
+    return $sql;
+}
+function make_sql_guild_league_guild_members_by_charname($char_name)
+{
+    $tmp_str=wrap_str($char_name);
+    $sql = "select guild_id,guild_league_id,contribution,data "
+            . "from guild_league_guild_members where guild_id in (select guild_id from common_characters where name in (".$tmp_str."));";
+    return $sql;
+}
+function make_sql_guild_league_members_by_charname($char_name)
+{
+    $tmp_str=wrap_str($char_name);
+    $sql = "select char_id,guild_league_id,class,contribution from guild_league_members where"
+        . " char_id in (select char_id from common_characters where name in (".$tmp_str."));";
+    return $sql;
+}
+function make_sql_common_characters_by_charid($char_id)
+{
+    $sql = "select name,char_id,guild_id,league_status,league_name,league_svrid from common_characters where char_id in (".$char_id."); ";
+    return $sql;
+}
+function make_sql_guild_league_by_charid($char_id)
+{
+    $sql = "select guild_league_id,srv_id,status,build_time,temp_time,level,size,money,credit,action,scn_id,name,leader "
+        . "from guild_league where guild_league_id in (select guild_league_id from common_characters where char_id in (".$char_id."));";
+    return $sql;
+}
+function make_sql_guild_league_guild_members_by_charid($char_id)
+{
+    $tmp_str=wrap_str($char_name);
+    $sql = "select guild_id,guild_league_id,contribution,data "
+        . "from guild_league_guild_members where guild_id in (select guild_id from common_characters where char_id in (".$char_id."));";
+    return $sql;
+}
+function make_sql_guild_league_members_by_charid($char_id)
+{
+    $sql = "select char_id,guild_league_id,class,contribution from guild_league_members where char_id in (".$char_id.");";
     return $sql;
 }
