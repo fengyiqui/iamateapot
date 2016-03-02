@@ -1,0 +1,34 @@
+-- 说明： 和服需要保留下面的表,name字段为acct_name
+-- 正常ip表
+DROP TABLE IF EXISTS `acct_check_ip_normal`;
+CREATE TABLE `acct_check_ip_normal`
+(
+	id   BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	name CHAR(32) NOT NULL DEFAULT 0,
+	ip   INT UNSIGNED NOT NULL DEFAULT 0,
+	location VARCHAR(128) NOT NULL DEFAULT 0,
+	INDEX(name)
+)ENGINE=InnoDB DEFAULT CHARSET = utf8;
+-- ip变化表
+DROP TABLE IF EXISTS `acct_check_ip_change`;
+CREATE TABLE `acct_check_ip_change`
+(
+	name   CHAR(32) PRIMARY KEY,
+	key_id SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+	answer VARCHAR(32) NOT NULL DEFAULT 0,
+	chg_times SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+	last_pop_time INT UNSIGNED NOT NULL DEFAULT 0,
+	last_chg_time INT UNSIGNED NOT NULL DEFAULT 0,
+	last_answer_fail INT UNSIGNED NOT NULL DEFAULT 0,
+	last_remind_time INT UNSIGNED NOT NULL DEFAULT 0,
+	alway_pop SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+	ab_location VARCHAR(128) NOT NULL DEFAULT 0
+)ENGINE=InnoDB DEFAULT CHARSET = utf8;
+-- 清空cd表
+DROP TABLE IF EXISTS `acct_check_ip_cd`;
+CREATE TABLE `acct_check_ip_cd`
+(
+	name   CHAR(32) PRIMARY KEY,
+	last_clear_time INT UNSIGNED NOT NULL DEFAULT 0,
+	clear_cd	INT UNSIGNED NOT NULL DEFAULT 0
+)ENGINE=InnoDB DEFAULT CHARSET = utf8;
