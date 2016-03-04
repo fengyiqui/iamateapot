@@ -168,6 +168,67 @@ function make_sql_chg_xianyu_for_qq($datetime1,$datetime2,$acct,$char_name,$case
 
     return $sql;
 }
+function make_sql_stock_info_for_qq($datetime1,$datetime2,$acct,$table_name)
+{
+    $sql="select * from ".$table_name." where log_datetime between '"
+        .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and (sell_acct in(".$acct.") or buy_acct in (".$acct."))";
+    }
+    $sql.=";";
+
+    return $sql;
+}
+function   make_sql_ah_add($datetime1,$datetime2, $acct, $char_name, $only_id,$table_name)
+{
+    $sql="select * from ".$table_name." where log_datetime between '"
+        .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and acct_name in(".$acct.")";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and char_name in(".$tmp_str.")";
+    }
+    if($only_id != "")
+    {
+        $sql.=" and item_id in(".$only_id.")";
+    }
+    $sql.=";";
+
+    return $sql;
+}
+function make_sql_ah_deal($datetime1,$datetime2, $acct, $char_name, $only_id,$table_name)
+{
+    $sql="select * from ".$table_name." where log_datetime between '"
+        .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and (buy_acct in(".$acct.") or sell_acct in (".$acct."))";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and (buy_char in(".$tmp_str.") or sell_char in (".$tmp_str."))";
+    }
+    if($only_id != "")
+    {
+        $sql.=" and item_id in(".$only_id.")";
+    }
+    $sql.=";";
+
+    return $sql;
+}
+/*function make_sql_gzs_ah_add($_POST["log_datetime1"],
+        $_POST["log_datetime2"],
+        $_POST["acct"],
+        $_POST["char_name"],
+        $_POST["case_id"],
+        "",
+        "gzs_ah_add");*/
 //league查询
 function make_sql_common_characters_by_charname($char_name)
 {
