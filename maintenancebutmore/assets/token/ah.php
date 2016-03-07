@@ -34,14 +34,14 @@ if("" != @$_POST["log_datetime1"])
         $_POST["acct"],
         $_POST["char_name"],
         $_POST["excel_id"],
-        "",
+        $_POST["only_id"],
         "gzs_ah_add");
     $sql3 = make_sql_gzs_ah_deal($_POST["log_datetime1"],
         $_POST["log_datetime2"],
-        $_POST["acct"],
-        $_POST["char_name"],
-        $_POST["case_id"],
         "",
+        $_POST["char_name"],
+        $_POST["excel_id"],
+        $_POST["only_id"],
         "gzs_ah_deal");
     echo("<br/>");
     echo($sql);
@@ -50,6 +50,7 @@ if("" != @$_POST["log_datetime1"])
     echo("<br/>");
     echo($sql2);
     echo("<br/>");
+    echo($sql3);
     echo("</p>");
     echo("<p>");
     echo("<a href=".$header_consts_index_url.">返回</a>");

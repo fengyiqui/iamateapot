@@ -17,31 +17,13 @@ $desc="用于查看道具的获得情况";
     if("" != @$_POST["log_datetime1"])
     {
         echo("<p>");
-        $sql = make_sql_item($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
+        $sql = make_sql_pri_messages(
             $_POST["char_name"],
-            $_POST["item_id"],
-            "item_get_info_for_qq");
-
-        $sql1 = make_sql_item($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
-            $_POST["char_name"],
-            $_POST["item_id"],
-            "char_item_lost_for_qq");
-        $sql2 = make_sql_item_lost_data($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
-            $_POST["char_name"],
-            $_POST["item_id"],
-            "char_item_lost_data_for_qq");
+            $_POST["char_id"],
+            $_POST["msg"],
+            "pri_messages");
         echo("<br/>");
         echo($sql);
-        echo("<br/>");
-        echo($sql1);
-        echo("<br/>");
-        echo($sql2);
         echo("<br/>");
         echo("</p>");
         echo("<p>");
@@ -57,7 +39,7 @@ $desc="用于查看道具的获得情况";
         </p>
         <pre>
         <form action="" method="post">
-            开始日：<input name="log_datetime1" class="laydate-icon" id="start" style="width:200px; margin-right:10px;">
+            开始日：<input name="log_datetime1" class="laydate-icon" id="start" style="width:200px; margin-right:10px;" value="1970-01-01 00:00:00">(为了不空)
             结束日：<input name="log_datetime2" class="laydate-icon" id="end" style="width:200px;">
             <script>
                 var start = {
@@ -86,9 +68,10 @@ $desc="用于查看道具的获得情况";
                 laydate(start);
                 laydate(end);
             </script>
-            acct:           <input type="text" name="acct"><br/>
             char_name:      <input type="text" name="char_name"><br/>
-            item_id:        <input type="text" name="item_id"><br/>
+            char_id:        <input type="text" name="char_id"><br/>
+            get_lock:       <input type="text" name="get_lock"><br/>
+            msg:            <input type="text" name="msg">(msg 使用的 like语句)<br/>
             <input type="submit">
         </form>
         </pre>

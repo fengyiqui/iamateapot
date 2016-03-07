@@ -17,6 +17,7 @@ i am a teapot, fat and round!!!;
     <a href="assets/money/mny_add.php" >金钱get</a><br/>
     <a href="assets/money/mny_sub.php" >金钱lost</a><br/>
     <a href="assets/money/mny_sub_add.php" >金钱lost+get</a><br/>
+    <a href="assets/money/market.php" >market,收购行</a><br/>
 </p>
 
 <p>
@@ -29,6 +30,17 @@ i am a teapot, fat and round!!!;
 <p>
     <b>联盟<br/></b>
     <a href="assets/league/league.php" >联盟各种</a><br/>
+</p>
+<p>
+    <b>怪物,NPC,boss,ogre<br/></b>
+    <a href="assets/npc/ogre_dead_info_for_qq.php" >怪物,ogre</a><br/>
+    <a href="assets/npc/dead_boss.php" >怪物,boss</a><br/>
+</p>
+<p>
+    <b>邮件,mail,leave_msg<br/></b>
+    <a href="assets/messages/leave_msg.php" >leave_msg</a><br/>
+    <a href="assets/messages/pri_messages.php" >pri_messages</a><br/>
+    <a href="assets/messages/pri_messages_leave_msg.php" >leave_msg+pri_messages</a><br/>
 </p>
 </body>
 </html>

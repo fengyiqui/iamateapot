@@ -17,27 +17,17 @@ $desc="用于查看道具的获得情况";
     if("" != @$_POST["log_datetime1"])
     {
         echo("<p>");
-        $sql = make_sql_item($_POST["log_datetime1"],
+        $sql = make_sql_leave_msg($_POST["log_datetime1"],
             $_POST["log_datetime2"],
             $_POST["acct"],
             $_POST["char_name"],
-            $_POST["item_id"],
-            "item_get_info_for_qq");
-
-        $sql1 = make_sql_item($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
+            "",//char_id
+            $_POST["msg"],
+            "leave_msg");
+        $sql2 = make_sql_pri_messages(
             $_POST["char_name"],
-            $_POST["item_id"],
-            "char_item_lost_for_qq");
-        $sql2 = make_sql_item_lost_data($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
-            $_POST["char_name"],
-            $_POST["item_id"],
-            "char_item_lost_data_for_qq");
-        echo("<br/>");
-        echo($sql);
+            $_POST["char_id"],//char_id
+            $_POST["msg"]);
         echo("<br/>");
         echo($sql1);
         echo("<br/>");
@@ -86,9 +76,11 @@ $desc="用于查看道具的获得情况";
                 laydate(start);
                 laydate(end);
             </script>
-            acct:           <input type="text" name="acct"><br/>
+            acct:           <input type="text" name="acct">(没有入库)<br/>
             char_name:      <input type="text" name="char_name"><br/>
-            item_id:        <input type="text" name="item_id"><br/>
+            char_id:        <input type="text" name="char_id"><br/>
+            get_lock:       <input type="text" name="get_lock"><br/>
+            msg:            <input type="text" name="msg">(msg 使用的 like语句)<br/>
             <input type="submit">
         </form>
         </pre>
