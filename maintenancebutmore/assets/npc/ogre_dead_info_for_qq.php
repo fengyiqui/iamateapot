@@ -17,31 +17,15 @@ $desc="用于查看道具的获得情况";
     if("" != @$_POST["log_datetime1"])
     {
         echo("<p>");
-        $sql = make_sql_item($_POST["log_datetime1"],
+        $sql = make_sql_ogre_dead_info_for_qq($_POST["log_datetime1"],
             $_POST["log_datetime2"],
             $_POST["acct"],
             $_POST["char_name"],
-            $_POST["item_id"],
-            "item_get_info_for_qq");
-
-        $sql1 = make_sql_item($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
-            $_POST["char_name"],
-            $_POST["item_id"],
-            "char_item_lost_for_qq");
-        $sql2 = make_sql_item_lost_data($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
-            $_POST["char_name"],
-            $_POST["item_id"],
-            "char_item_lost_data_for_qq");
+            "", //char_id
+            $_POST["ogre_id"],
+            "ogre_dead_info_for_qq");
         echo("<br/>");
         echo($sql);
-        echo("<br/>");
-        echo($sql1);
-        echo("<br/>");
-        echo($sql2);
         echo("<br/>");
         echo("</p>");
         echo("<p>");
@@ -88,7 +72,7 @@ $desc="用于查看道具的获得情况";
             </script>
             acct:           <input type="text" name="acct"><br/>
             char_name:      <input type="text" name="char_name"><br/>
-            item_id:        <input type="text" name="item_id"><br/>
+            ogre_id:        <input type="text" name="ogre_id"><br/>
             <input type="submit">
         </form>
         </pre>

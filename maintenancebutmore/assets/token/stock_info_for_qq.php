@@ -1,7 +1,7 @@
 <?php
 include_once("../common/header_consts.php");
 include_once("../sql/item/item.php");
-$desc="用于查看道具的获得情况";
+$desc="用于查看gzs扣仙玉的情况";
 ?>
 <html>
 <head>
@@ -13,49 +13,46 @@ $desc="用于查看道具的获得情况";
 
 <?php
 
-    // 加个@防止warning
-    if("" != @$_POST["log_datetime1"])
-    {
-        echo("<p>");
-        $sql = make_sql_item($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
-            $_POST["char_name"],
-            $_POST["item_id"],
-            "item_get_info_for_qq");
-
-        $sql1 = make_sql_item($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
-            $_POST["char_name"],
-            $_POST["item_id"],
-            "char_item_lost_for_qq");
-        $sql2 = make_sql_item_lost_data($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
-            $_POST["char_name"],
-            $_POST["item_id"],
-            "char_item_lost_data_for_qq");
-        echo("<br/>");
-        echo($sql);
-        echo("<br/>");
-        echo($sql1);
-        echo("<br/>");
-        echo($sql2);
-        echo("<br/>");
-        echo("</p>");
-        echo("<p>");
-        echo("<a href=".$header_consts_index_url.">返回</a>");
-        echo("</p>");
-        //TODO： charid sql生成器？
-    }
-    else
-    {
- ?>
-        <p>
-            <?php echo ($desc); ?>
-        </p>
-        <pre>
+// 加个@防止warning
+if("" != @$_POST["log_datetime1"])
+{
+    echo("<p>");
+    $sql = make_sql_stock_info_for_qq($_POST["log_datetime1"],
+        $_POST["log_datetime2"],
+        $_POST["acct"],
+        "stock_info_for_qq");
+    $sql1 = make_sql_xianyu_trace($_POST["log_datetime1"],
+        $_POST["log_datetime2"],
+        $_POST["acct"],
+        "",
+        "xianyu_trace");
+    $sql2 = make_sql_chg_xianyu_for_qq($_POST["log_datetime1"],
+        $_POST["log_datetime2"],
+        $_POST["acct"],
+        $_POST["char_name"],
+        $_POST["case_id"],
+        "",
+        "chg_xianyu_for_qq");
+    echo("<br/>");
+    echo($sql);
+    echo("<br/>");
+    echo($sql1);
+    echo("<br/>");
+    echo($sql2);
+    echo("<br/>");
+    echo("</p>");
+    echo("<p>");
+    echo("<a href=".$header_consts_index_url.">返回</a>");
+    echo("</p>");
+    //TODO： charid sql生成器？
+}
+else
+{
+    ?>
+    <p>
+        <?php echo ($desc); ?>
+    </p>
+    <pre>
         <form action="" method="post">
             开始日：<input name="log_datetime1" class="laydate-icon" id="start" style="width:200px; margin-right:10px;">
             结束日：<input name="log_datetime2" class="laydate-icon" id="end" style="width:200px;">
@@ -88,12 +85,12 @@ $desc="用于查看道具的获得情况";
             </script>
             acct:           <input type="text" name="acct"><br/>
             char_name:      <input type="text" name="char_name"><br/>
-            item_id:        <input type="text" name="item_id"><br/>
+            case_id:        <input type="text" name="case_id" value="9"><br/>
             <input type="submit">
         </form>
         </pre>
 <?php
-    }
+}
 ?>
 
 </body>

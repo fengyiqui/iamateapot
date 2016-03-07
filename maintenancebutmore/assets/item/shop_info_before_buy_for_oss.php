@@ -1,7 +1,7 @@
 <?php
 include_once("../common/header_consts.php");
 include_once("../sql/item/item.php");
-$desc="用于查看道具的获得情况";
+$desc="仙玉返利专用表，商城购买前统计，相对详细的价格";
 ?>
 <html>
 <head>
@@ -30,12 +30,14 @@ $desc="用于查看道具的获得情况";
             $_POST["char_name"],
             $_POST["item_id"],
             "char_item_lost_for_qq");
-        $sql2 = make_sql_item_lost_data($_POST["log_datetime1"],
+        $sql2 = make_sql_item_shop_info_before_buy_for_oss($_POST["log_datetime1"],
             $_POST["log_datetime2"],
             $_POST["acct"],
             $_POST["char_name"],
-            $_POST["item_id"],
-            "char_item_lost_data_for_qq");
+            $_POST["type"],
+            $_POST["excel_id"],
+            $_POST["char_id"],
+            "shop_info_before_buy_for_oss");
         echo("<br/>");
         echo($sql);
         echo("<br/>");
@@ -88,7 +90,9 @@ $desc="用于查看道具的获得情况";
             </script>
             acct:           <input type="text" name="acct"><br/>
             char_name:      <input type="text" name="char_name"><br/>
-            item_id:        <input type="text" name="item_id"><br/>
+            type            <input type="text" name="type"><br/>
+            excel_id        <input type="text" name="excel_id"><br/>
+            char_id         <input type="text" name="char_id"><br/>
             <input type="submit">
         </form>
         </pre>
