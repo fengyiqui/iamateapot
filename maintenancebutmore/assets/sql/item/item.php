@@ -37,18 +37,7 @@ function make_sql_item($datetime1,$datetime2,$acct,$char_name,$item_id,$table_na
     }
     if($char_name != "")
     {
-        // $sql.="and char_name in(".$_POST["char_name"].")";
-        //如果char_name是使用,分割的，就给每个自动用单引号包裹上
-        $char_name_arr=explode(",",$char_name);
-        $arr_len= count($char_name_arr);
-        $tmp_str="";
-        for($i=0;$i<$arr_len;++$i)
-        {
-            if($i == $arr_len-1)
-                $tmp_str.="'".$char_name_arr[$i]."'";
-            else
-                $tmp_str.="'".$char_name_arr[$i]."',";
-        }
+        $tmp_str=wrap_str($char_name);
         $sql.=" and char_name in (".$tmp_str.")";
     }
     if($item_id != "")
@@ -69,18 +58,7 @@ function make_sql_item_lost_data($datetime1,$datetime2,$acct,$char_name,$item_id
     }
     if($char_name != "")
     {
-        // $sql.="and char_name in(".$_POST["char_name"].")";
-        //如果char_name是使用,分割的，就给每个自动用单引号包裹上
-        $char_name_arr=explode(",",$char_name);
-        $arr_len= count($char_name_arr);
-        $tmp_str="";
-        for($i=0;$i<$arr_len;++$i)
-        {
-            if($i == $arr_len-1)
-                $tmp_str.="'".$char_name_arr[$i]."'";
-            else
-                $tmp_str.="'".$char_name_arr[$i]."',";
-        }
+        $tmp_str=wrap_str($char_name);
         $sql.=" and char_name in (".$tmp_str.")";
     }
     if($item_id != "")
@@ -91,7 +69,35 @@ function make_sql_item_lost_data($datetime1,$datetime2,$acct,$char_name,$item_id
 
     return $sql;
 }
+function make_sql_item_shop_info_before_buy_for_oss($datetime1,$datetime2,$acct,$char_name,$type,$excel_id,$char_id,$table_name)
+{
+    $sql="select * from ".$table_name." where log_datetime between '"
+        .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and acct_name in(".$acct.")";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and char_name in (".$tmp_str.")";
+    }
+    if($type != "")
+    {
+        $sql.=" and type in(".$type.")";
+    }
+    if($excel_id != "")
+    {
+        $sql.=" and excel_id_bought in(".$excel_id.")";
+    }
+    if($char_id != "")
+    {
+        $sql.=" and char_id in(".$char_id.")";
+    }
+    $sql.=";";
 
+    return $sql;
+}
 //金钱类
 function make_sql_money($datetime1,$datetime2,$acct,$char_name,$case_id,$table_name)
 {
@@ -103,18 +109,7 @@ function make_sql_money($datetime1,$datetime2,$acct,$char_name,$case_id,$table_n
     }
     if($char_name != "")
     {
-        // $sql.="and char_name in(".$_POST["char_name"].")";
-        //如果char_name是使用,分割的，就给每个自动用单引号包裹上
-        $char_name_arr=explode(",",$char_name);
-        $arr_len= count($char_name_arr);
-        $tmp_str="";
-        for($i=0;$i<$arr_len;++$i)
-        {
-            if($i == $arr_len-1)
-                $tmp_str.="'".$char_name_arr[$i]."'";
-            else
-                $tmp_str.="'".$char_name_arr[$i]."',";
-        }
+        $tmp_str=wrap_str($char_name);
         $sql.=" and char_name in (".$tmp_str.")";
     }
     if($case_id != "")
@@ -335,6 +330,10 @@ function make_sql_gzs_ah_deal($datetime1,$datetime2, $acct, $char_name, $only_id
     {
         $sql.=" and item_id in(".$only_id.")";
     }
+    if($excel_id != "")
+    {
+        $sql.=" and excel_id in(".$excel_id.")";
+    }
     $sql.=";";
 
     return $sql;
@@ -439,6 +438,51 @@ function make_sql_dead_boss($datetime1,$datetime2,$acct,$char_name,$char_id,$ogr
     $sql.=";";
     return $sql;
 }
+function make_sql_char_pet_recover_for_qq($datetime1,$datetime2,$acct,$char_name,$char_id,$table_name)
+{
+    $sql="select * from ".$table_name." where log_datetime between '"
+        .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and acct_name in(".$acct.")";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and char_name in (".$tmp_str.")";
+    }
+    if($char_id != "")
+    {
+        $sql.=" and char_id in(".$char_id.")";
+    }
+    $sql.=";";
+    return $sql;
+}
+function make_sql_petid_log_for_qq($datetime1,$datetime2,$acct,$char_name,$char_id,$pet_listid,$table_name)
+{
+    $sql="select * from ".$table_name." where log_datetime between '"
+        .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and acct_name in(".$acct.")";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and char_name in (".$tmp_str.")";
+    }
+    if($char_id != "")
+    {
+        $sql.=" and char_id in(".$char_id.")";
+    }
+    if($pet_listid != "")
+    {
+        $sql.=" and pet_id in(".$pet_listid.")";
+    }
+    $sql.=";";
+    return $sql;
+}
+//邮件
 function make_sql_leave_msg($datetime1,$datetime2,$acct,$char_name,$char_id,$msg,$table_name)
 {
     $sql="select * from ".$table_name." where log_datetime between '"
@@ -483,4 +527,33 @@ function make_sql_pri_messages($char_name,$char_id,$msg)
     }
     $sql.=";";
     return $sql;
+}
+//场景
+function make_sql_chgscn_log($datetime1,$datetime2,$acct,$char_name,$char_id,$old_scn,$new_scn,$table_name)
+{  $sql="select * from ".$table_name." where log_datetime between '"
+    .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and acct_name in(".$acct.")";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and char_name in (".$tmp_str.")";
+    }
+    if($char_id != "")
+    {
+        $sql.=" and char_id in(".$char_id.")";
+    }
+    if($old_scn != "")
+    {
+        $sql.=" and old_scn in(".$old_scn.")";
+    }
+    if($new_scn != "")
+    {
+        $sql.=" and new_scn in(".$new_scn.")";
+    }
+    $sql.=";";
+    return $sql;
+
 }
