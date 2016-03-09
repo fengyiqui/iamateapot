@@ -1,7 +1,7 @@
 <?php
 include_once("../common/header_consts.php");
 include_once("../sql/item/item.php");
-$desc="用于查看道具的获得情况";
+$desc="登陆,ip，login";
 ?>
 <html>
 <head>
@@ -17,34 +17,15 @@ $desc="用于查看道具的获得情况";
     if("" != @$_POST["log_datetime1"])
     {
         echo("<p>");
-        $sql = make_sql_item($_POST["log_datetime1"],
+        $sql = make_sql_acct_login_info_for_qq($_POST["log_datetime1"],
             $_POST["log_datetime2"],
             $_POST["acct"],
             $_POST["char_name"],
-            $_POST["excel_id"],
-            $_POST["case_id"],
-            "item_get_info_for_qq");
-
-        $sql1 = make_sql_item($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
-            $_POST["char_name"],
-            $_POST["excel_id"],
-            $_POST["case_id"],
-            "char_item_lost_for_qq");
-        $sql2 = make_sql_item_lost_data($_POST["log_datetime1"],
-            $_POST["log_datetime2"],
-            $_POST["acct"],
-            $_POST["char_name"],
-            $_POST["excel_id"],
-            $_POST["case_id"],
-            "char_item_lost_data_for_qq");
+            $_POST["char_id"],
+            $_POST["ip"],
+            "acct_login_info_for_qq");
         echo("<br/>");
         echo($sql);
-        echo("<br/>");
-        echo($sql1);
-        echo("<br/>");
-        echo($sql2);
         echo("<br/>");
         echo("</p>");
         echo("<p>");
@@ -91,8 +72,8 @@ $desc="用于查看道具的获得情况";
             </script>
             acct:           <input type="text" name="acct"><br/>
             char_name:      <input type="text" name="char_name"><br/>
-            excel_id:       <input type="text" name="excel_id"><br/>
-            case_id:        <input type="text" name="case_id"><br/>
+            char_id         <input type="text" name="char_id"><br/>
+            ip              <input type="text" name="ip"><br/>
             <input type="submit">
         </form>
         </pre>

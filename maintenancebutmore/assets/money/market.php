@@ -108,7 +108,7 @@ else
             acct:           <input type="text" name="acct"><br/>
             char_name:      <input type="text" name="char_name"><br/>
             char_id:        <input type="text" name="char_id"><br/>
-            case_id:        <input type="text" name="case_id" value="81,82,83,84"><br/>
+            case_id:        <input type="text" name="case_id" value="81,82,83,84,1120">(1120是lost)<br/>
             excel_id:       <input type="text" name="excel_id"><br/>
             <input type="submit">
         </form>

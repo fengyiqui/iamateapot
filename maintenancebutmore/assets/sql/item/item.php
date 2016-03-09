@@ -6,6 +6,55 @@
  * Time: 下午2:33
  */
 //通用类
+//难道不提供自带的swap函数?
+function my_swap(&$a, &$b)
+{
+    $c=$a;
+    $a = $b;
+    $b = $c;
+}
+function digital_auto_fill($digital_str,$delimiter="-",$new_delimiter=",")
+{
+    if(strpos($digital_str,$delimiter) != false)
+    {
+        $tmp_arr=explode($delimiter,$digital_str);
+        $arr_len= count($tmp_arr);
+        if($arr_len == 2)
+        {
+            $tmp_str = "";
+            $tmp_min=(int)$tmp_arr[0];
+            $tmp_max=(int)$tmp_arr[1];
+            if($tmp_max < $tmp_min)
+                my_swap($tmp_max,$tmp_min);
+            for($i=$tmp_min;$i<=$tmp_max;++$i)
+            {
+                if($i == $tmp_max)
+                    $tmp_str .= $i;
+                else
+                    $tmp_str .= $i.$new_delimiter;
+            }//EOF of for
+            return $tmp_str;
+        }
+    }
+
+    return $digital_str;
+}
+//1,3,4-6 => 1,3,4,5,6
+function wrap_digital($str,$delimiter=",",$new_delimiter=",",$wrap_str="")
+{
+    $tmp_arr=explode($delimiter,$str);
+    $arr_len= count($tmp_arr);
+    $tmp_str="";
+    for($i=0;$i<$arr_len;++$i)
+    {
+        $t = digital_auto_fill($tmp_arr[$i]);
+        if($i == $arr_len-1)
+            $tmp_str.=$wrap_str.$t.$wrap_str;
+        else
+            $tmp_str.=$wrap_str.$t.$wrap_str.$new_delimiter;
+    }
+    return $tmp_str;
+}
 function wrap_str($str,$delimiter=",",$new_delimiter=",",$wrap_str="'")
 {
     $tmp_arr=explode($delimiter,$str);
@@ -27,7 +76,7 @@ function    make_sql_acct($acct)
     return $sql;
 }
 //道具类
-function make_sql_item($datetime1,$datetime2,$acct,$char_name,$item_id,$table_name)
+function make_sql_item($datetime1,$datetime2,$acct,$char_name,$excel_id,$case_id,$table_name)
 {
     $sql="select * from ".$table_name." where log_datetime between '"
         .$datetime1."' and '".$datetime2."'";
@@ -40,15 +89,21 @@ function make_sql_item($datetime1,$datetime2,$acct,$char_name,$item_id,$table_na
         $tmp_str=wrap_str($char_name);
         $sql.=" and char_name in (".$tmp_str.")";
     }
-    if($item_id != "")
+    if($excel_id != "")
     {
-        $sql.=" and item_id in(".$item_id.")";
+        $tmp_str = wrap_digital($excel_id);
+        $sql.=" and item_id in(".$tmp_str.")";
+    }
+    if($case_id != "")
+    {
+        $tmp_str = wrap_digital($case_id);
+        $sql.=" and case_id in(".$tmp_str.")";
     }
     $sql.=";";
 
     return $sql;
 }
-function make_sql_item_lost_data($datetime1,$datetime2,$acct,$char_name,$item_id,$table_name)
+function make_sql_item_lost_data($datetime1,$datetime2,$acct,$char_name,$excel_id,$case_id,$table_name)
 {
     $sql="select * from ".$table_name." where log_datetime between '"
         .$datetime1."' and '".$datetime2."'";
@@ -61,9 +116,15 @@ function make_sql_item_lost_data($datetime1,$datetime2,$acct,$char_name,$item_id
         $tmp_str=wrap_str($char_name);
         $sql.=" and char_name in (".$tmp_str.")";
     }
-    if($item_id != "")
+    if($excel_id != "")
     {
-        $sql.=" and excel_id in(".$item_id.")";
+        $tmp_str = wrap_digital($excel_id);
+        $sql.=" and excel_id in(".$tmp_str.")";
+    }
+    if($case_id != "")
+    {
+        $tmp_str = wrap_digital($case_id);
+        $sql.=" and case_id in(".$tmp_str.")";
     }
     $sql.=";";
 
@@ -88,7 +149,8 @@ function make_sql_item_shop_info_before_buy_for_oss($datetime1,$datetime2,$acct,
     }
     if($excel_id != "")
     {
-        $sql.=" and excel_id_bought in(".$excel_id.")";
+        $tmp_str = wrap_digital($excel_id);
+        $sql.=" and excel_id_bought in(".$tmp_str.")";
     }
     if($char_id != "")
     {
@@ -96,6 +158,30 @@ function make_sql_item_shop_info_before_buy_for_oss($datetime1,$datetime2,$acct,
     }
     $sql.=";";
 
+    return $sql;
+}
+function make_sql_common_characters($char_name,$char_id,$excel_id)
+{
+    if($char_name == "" && $char_id == "")
+        return "char_name and char_id can not be both null";
+    $sql="select c.name,c.char_id,i.item_id,i.excel_id,i.auto_id,i.num from common_characters c, common_items i
+            where c.char_id = i.char_id";
+
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and c.name in (".$tmp_str.")";
+    }
+    if($char_id != "")
+    {
+        $sql.=" and c.char_id in(".$char_id.")";
+    }
+    if($excel_id != "")
+    {
+        $tmp_str = wrap_digital($excel_id);
+        $sql.=" and i.excel_id in (".$tmp_str.")";
+    }
+    $sql.=";";
     return $sql;
 }
 //金钱类
@@ -114,7 +200,8 @@ function make_sql_money($datetime1,$datetime2,$acct,$char_name,$case_id,$table_n
     }
     if($case_id != "")
     {
-        $sql.=" and consumption_type in(".$case_id.")";
+        $tmp_str = wrap_digital($case_id);
+        $sql.=" and consumption_type in(".$tmp_str.")";
     }
     $sql.=";";
     return $sql;
@@ -138,7 +225,8 @@ function make_sql_market_add($datetime1,$datetime2,$acct,$char_name,$char_id,$ex
     }
     if($excel_id != "")
     {
-        $sql.=" and excel_id in(".$excel_id.")";
+        $tmp_str = wrap_digital($excel_id);
+        $sql.=" and excel_id in(".$tmp_str.")";
     }
     $sql.=";";
     return $sql;
@@ -162,7 +250,8 @@ function make_sql_market_abort($datetime1,$datetime2,$acct,$char_name,$char_id,$
     }
     if($excel_id != "")
     {
-        $sql.=" and excel_id in(".$excel_id.")";
+        $tmp_str = wrap_digital($excel_id);
+        $sql.=" and excel_id in(".$tmp_str.")";
     }
     $sql.=";";
     return $sql;
@@ -186,7 +275,8 @@ function make_sql_market_deal($datetime1,$datetime2,$acct,$char_name,$char_id,$e
     }
     if($excel_id != "")
     {
-        $sql.=" and excel_id in(".$excel_id.")";
+        $tmp_str = wrap_digital($excel_id);
+        $sql.=" and excel_id in(".$tmp_str.")";
     }
     $sql.=";";
     return $sql;
@@ -224,7 +314,8 @@ function make_sql_chg_xianyu_for_qq($datetime1,$datetime2,$acct,$char_name,$case
     }
     if($case_id != "")
     {
-        $sql.=" and case_id in(".$case_id.")";
+        $tmp_str = wrap_digital($case_id);
+        $sql.=" and case_id in(".$tmp_str.")";
     }
     if($case_data != "")
     {
@@ -332,7 +423,8 @@ function make_sql_gzs_ah_deal($datetime1,$datetime2, $acct, $char_name, $only_id
     }
     if($excel_id != "")
     {
-        $sql.=" and excel_id in(".$excel_id.")";
+        $tmp_str = wrap_digital($excel_id);
+        $sql.=" and excel_id in(".$tmp_str.")";
     }
     $sql.=";";
 
@@ -409,7 +501,8 @@ function make_sql_ogre_dead_info_for_qq($datetime1,$datetime2,$acct,$char_name,$
     }
     if($ogre_id != "")
     {
-        $sql.=" and ogre_id in(".$ogre_id.")";
+        $tmp_str = wrap_digital($ogre_id);
+        $sql.=" and ogre_id in(".$tmp_str.")";
     }
     $sql.=";";
     return $sql;
@@ -433,7 +526,8 @@ function make_sql_dead_boss($datetime1,$datetime2,$acct,$char_name,$char_id,$ogr
     }
     if($ogre_id != "")
     {
-        $sql.=" and boss_excelid in(".$ogre_id.")";
+        $tmp_str = wrap_digital($ogre_id);
+        $sql.=" and boss_excelid in(".$tmp_str.")";
     }
     $sql.=";";
     return $sql;
@@ -477,7 +571,8 @@ function make_sql_petid_log_for_qq($datetime1,$datetime2,$acct,$char_name,$char_
     }
     if($pet_listid != "")
     {
-        $sql.=" and pet_id in(".$pet_listid.")";
+        $tmp_str = wrap_digital($pet_listid);
+        $sql.=" and pet_id in(".$tmp_str.")";
     }
     $sql.=";";
     return $sql;
@@ -502,13 +597,16 @@ function make_sql_leave_msg($datetime1,$datetime2,$acct,$char_name,$char_id,$msg
     }
     if($msg != "")
     {
-        $sql.=" and msg like %".$msg."%";
+        $sql.=" and msg like '%".$msg."%'";
     }
     $sql.=";";
     return $sql;
 }
 function make_sql_pri_messages($char_name,$char_id,$msg)
 {
+    if($char_name == "" && $char_id == "")
+        return "char_name and char_id can not be both null";
+
     $sql="select c.char_id,c.name,pri.msg_id,pri.msg_date,uncompress(pri.msg_stuff),pri.get_lock
         from common_characters c, pri_messages pri where c.char_id = pri.char_id ";
 
@@ -547,11 +645,39 @@ function make_sql_chgscn_log($datetime1,$datetime2,$acct,$char_name,$char_id,$ol
     }
     if($old_scn != "")
     {
-        $sql.=" and old_scn in(".$old_scn.")";
+        $tmp_str = wrap_digital($old_scn);
+        $sql.=" and old_scn in(".$tmp_str.")";
     }
     if($new_scn != "")
     {
-        $sql.=" and new_scn in(".$new_scn.")";
+        $tmp_str = wrap_digital($new_scn);
+        $sql.=" and new_scn in(".$tmp_str.")";
+    }
+    $sql.=";";
+    return $sql;
+
+}
+//登陆
+function make_sql_acct_login_info_for_qq($datetime1,$datetime2,$acct,$char_name,$char_id,$ip,$table_name)
+{  $sql="select * from ".$table_name." where log_datetime between '"
+    .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and acct_name in(".$acct.")";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and char_name in (".$tmp_str.")";
+    }
+    if($char_id != "")
+    {
+        $sql.=" and char_id in(".$char_id.")";
+    }
+    if($ip != "")
+    {
+        $tmp_str=wrap_str($ip);
+        $sql.=" and char_login_ip in(".$tmp_str.")";
     }
     $sql.=";";
     return $sql;

@@ -12,6 +12,7 @@ i am a teapot, fat and round!!!;
     <a href="assets/item/get_all.php" >道具获得</a><br/>
     <a href="assets/item/lost_get_all.php" >道具获得+丢失</a><br/>
     <a href="assets/item/shop_info_before_buy_for_oss.php" >商城卖出,oss,仙玉返利<br/>
+    <a href="assets/item/common_items.php" >道具存在玩家身上<br/>
 </p>
 <p>
     <b>金钱类<br/></b>
@@ -46,11 +47,19 @@ i am a teapot, fat and round!!!;
 </p>
 <p>
     <b>场景,scn<br/></b>
-    <a href="assets/scn/chgscn_log.php" >leave_msg</a><br/>
+    <a href="assets/scn/chgscn_log.php" >chgscn</a><br/>
+</p>
+<p>
+    <b>登陆,login，ip<br/></b>
+    <a href="assets/login/acct_login_info_for_qq.php" >acct_login_info_for_qq</a><br/>
 </p>
 <p>
     <b>功能类<br/></b>
     <a href="#" >gm指令</a><br/>
+</p>
+<p>
+    <b>tmp<br/></b>
+    <a href="tmp/sendemail.php" >email</a><br/>
 </p>
 </body>
 </html>

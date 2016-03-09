@@ -21,7 +21,8 @@ $desc="用于查看道具的获得情况";
             $_POST["log_datetime2"],
             $_POST["acct"],
             $_POST["char_name"],
-            $_POST["item_id"],
+            $_POST["excel_id"],
+            $_POST["case_id"],
             "item_get_info_for_qq");
         echo("<br/>");
         echo($sql);
@@ -71,7 +72,8 @@ $desc="用于查看道具的获得情况";
             </script>
             acct:           <input type="text" name="acct"><br/>
             char_name:      <input type="text" name="char_name"><br/>
-            item_id:        <input type="text" name="item_id"><br/>
+            excel_id:       <input type="text" name="excel_id"><br/>
+            case_id:        <input type="text" name="case_id"><br/>
             <input type="submit">
         </form>
         </pre>
