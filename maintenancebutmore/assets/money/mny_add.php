@@ -21,7 +21,10 @@ if("" != @$_POST["log_datetime1"])
         $_POST["log_datetime2"],
         $_POST["acct"],
         $_POST["char_name"],
+        $_POST["char_id"],
         $_POST["case_id"],
+        $_POST["case_data"],
+        $_POST["scn_id"],
         "char_money_add_for_qq");
     echo("<br/>");
     echo($sql);
@@ -71,7 +74,10 @@ else
             </script>
             acct:           <input type="text" name="acct"><br/>
             char_name:      <input type="text" name="char_name"><br/>
-            item_id:        <input type="text" name="case_id"><br/>
+            char_id:        <input type="text" name="char_id"><br/>
+            case_id:        <input type="text" name="case_id"><br/>
+            case_data:      <input type="text" name="case_data"><br/>
+            scn_id:         <input type="text" name="scn_id"><br/>
             <input type="submit">
         </form>
         </pre>

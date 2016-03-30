@@ -21,14 +21,20 @@ if("" != @$_POST["log_datetime1"])
         $_POST["log_datetime2"],
         $_POST["acct"],
         $_POST["char_name"],
+        $_POST["char_id"],
         $_POST["case_id"],
+        "",//case_data
+        "",//scn_id
         "char_money_sub_for_qq");
 
     $sql_add = make_sql_money($_POST["log_datetime1"],
         $_POST["log_datetime2"],
         $_POST["acct"],
         $_POST["char_name"],
+        $_POST["char_id"],
         $_POST["case_id"],
+        "",//case_data
+        "",//scn_id
         "char_money_add_for_qq");
     $sql_market_add = make_sql_market_add($_POST["log_datetime1"],
         $_POST["log_datetime2"],

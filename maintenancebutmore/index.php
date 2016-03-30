@@ -20,6 +20,9 @@ i am a teapot, fat and round!!!;
     <a href="assets/money/mny_sub.php" >金钱lost</a><br/>
     <a href="assets/money/mny_sub_add.php" >金钱lost+get</a><br/>
     <a href="assets/money/market.php" >market,收购行</a><br/>
+    <a href="assets/money/mny_char_boundmoney_add_for_qq.php" ><b>绑定</b>金钱get</a><br/>
+    <a href="assets/money/mny_char_boundmoney_sub_for_qq.php" ><b>绑定</b>金钱lost</a><br/>
+    <a href="assets/money/mny_bound_sub_add.php" ><b>绑定</b>金钱lost+get</a><br/>
 </p>
 
 <p>
@@ -56,10 +59,12 @@ i am a teapot, fat and round!!!;
 <p>
     <b>功能类<br/></b>
     <a href="#" >gm指令</a><br/>
+    <a href="assets/exportchar/exportcha.php" >导号</a><br/>
 </p>
 <p>
     <b>tmp<br/></b>
-    <a href="tmp/sendemail.php" >email</a><br/>
+    <a href="assets/tmp/sendemail.php" >email</a><br/>
 </p>
+
 </body>
 </html>

@@ -29,7 +29,7 @@ $desc="用于查看道具的获得情况";
             $_POST["char_id"],//char_id
             $_POST["msg"]);
         echo("<br/>");
-        echo($sql1);
+        echo($sql);
         echo("<br/>");
         echo($sql2);
         echo("<br/>");

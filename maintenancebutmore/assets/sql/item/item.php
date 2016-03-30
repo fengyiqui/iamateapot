@@ -185,7 +185,7 @@ function make_sql_common_characters($char_name,$char_id,$excel_id)
     return $sql;
 }
 //金钱类
-function make_sql_money($datetime1,$datetime2,$acct,$char_name,$case_id,$table_name)
+function make_sql_money($datetime1,$datetime2,$acct,$char_name,$char_id,$case_id,$case_data,$scn_id,$table_name)
 {
     $sql="select * from ".$table_name." where log_datetime between '"
         .$datetime1."' and '".$datetime2."'";
@@ -198,10 +198,59 @@ function make_sql_money($datetime1,$datetime2,$acct,$char_name,$case_id,$table_n
         $tmp_str=wrap_str($char_name);
         $sql.=" and char_name in (".$tmp_str.")";
     }
+    if($char_id != "")
+    {
+        $sql.=" and char_id in(".$char_id.")";
+    }
     if($case_id != "")
     {
         $tmp_str = wrap_digital($case_id);
         $sql.=" and consumption_type in(".$tmp_str.")";
+    }
+    if($case_data != "")
+    {
+        $tmp_str = wrap_digital($case_data);
+        $sql.=" and consumption_data in(".$tmp_str.")";
+    }
+    if($scn_id != "")
+    {
+        $tmp_str = wrap_digital($scn_id);
+        $sql.=" and scn_id in(".$tmp_str.")";
+    }
+    $sql.=";";
+    return $sql;
+}
+function make_sql_bound_money($datetime1,$datetime2,$acct,$char_name,$char_id,$case_id,$case_data,$scn_id,$table_name)
+{
+    $sql="select * from ".$table_name." where log_datetime between '"
+        .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and account_name in(".$acct.")";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and char_name in (".$tmp_str.")";
+    }
+    if($char_id != "")
+    {
+        $sql.=" and char_id in(".$char_id.")";
+    }
+    if($case_id != "")
+    {
+        $tmp_str = wrap_digital($case_id);
+        $sql.=" and consumption_type in(".$tmp_str.")";
+    }
+    if($case_data != "")
+    {
+        $tmp_str = wrap_digital($case_data);
+        $sql.=" and consumption_data in(".$tmp_str.")";
+    }
+    if($scn_id != "")
+    {
+        $tmp_str = wrap_digital($scn_id);
+        $sql.=" and scn_id in(".$tmp_str.")";
     }
     $sql.=";";
     return $sql;
