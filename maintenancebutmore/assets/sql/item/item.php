@@ -75,6 +75,27 @@ function    make_sql_acct($acct)
     $sql = "select a.name,a.account_id,c.name,c.char_id from common_accounts a, common_characters c where a.account_id = c.account_id and a.name = '".$acct."'";
     return $sql;
 }
+function make_sql_acct_char_name($acct,$char_name,$char_id)
+{
+    $sql = "select a.name,a.account_id,c.name,c.char_id from common_accounts a, common_characters c where a.account_id = c.account_id ";
+    if($acct != "")
+    {
+        $tmp_str=wrap_str($acct);
+        $sql .="and a.name in (".$tmp_str.")";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql .="and c.name in (".$tmp_str.")";
+    }
+    if($char_id != "")
+    {
+        $tmp_str = wrap_digital($char_id);
+        $sql .="and c.char_id in (".$tmp_str.")";
+    }
+    $sql.=";";
+    return $sql;
+}
 //道具类
 function make_sql_item($datetime1,$datetime2,$acct,$char_name,$excel_id,$case_id,$table_name)
 {
@@ -728,6 +749,30 @@ function make_sql_acct_login_info_for_qq($datetime1,$datetime2,$acct,$char_name,
         $tmp_str=wrap_str($ip);
         $sql.=" and char_login_ip in(".$tmp_str.")";
     }
+    $sql.=";";
+    return $sql;
+
+}
+//奖励
+function make_sql_player_award($datetime1,$datetime2,$acct,$char_name,$award_id,$table_name)
+{
+    $sql="select * from ".$table_name." where log_datetime between '"
+    .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and account_name in(".$acct.")";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and char_name in (".$tmp_str.")";
+    }
+    if($award_id != "")
+    {
+        $tmp_str = wrap_digital($award_id);
+        $sql.=" and award_id in(".$tmp_str.")";
+    }
+
     $sql.=";";
     return $sql;
 

@@ -53,9 +53,16 @@ i am a teapot, fat and round!!!;
     <a href="assets/scn/chgscn_log.php" >chgscn</a><br/>
 </p>
 <p>
-    <b>登陆,login，ip<br/></b>
+    <b>登陆,login，ip,查看玩家账号，角色<br/></b>
     <a href="assets/login/acct_login_info_for_qq.php" >acct_login_info_for_qq</a><br/>
+    <a href="assets/login/acct_char_name.php" >账号,角色</a><br/>
 </p>
+
+<p>
+    <b>奖励,award_list<br/></b>
+    <a href="assets/award/player_award.php" >player_award</a><br/>
+</p>
+
 <p>
     <b>功能类<br/></b>
     <a href="#" >gm指令</a><br/>
