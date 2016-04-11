@@ -17,7 +17,7 @@ $desc="用于发送提取cha的邮件";
 <?php
 
 // 加个@防止warning
-if("" !=  $_POST["cfg"])
+if("" !=  @$_POST["cfg"])
 {
     $mycfg          =  $_POST["cfg"];
     $tmp_arr        = explode(",",$mycfg);

@@ -6,7 +6,7 @@
  * Time: 下午6:08
  */
 function auto_fill_option()
-{
+{//曾经鄙视别人这么多，我也这么做了，。。。
     $arr_area["10 葫芦山"]=10;
     $arr_area["11 沙子洲"]=11;
     $arr_area["12 锦绣林"]=12;
