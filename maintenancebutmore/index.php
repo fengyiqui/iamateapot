@@ -31,13 +31,14 @@ i am a teapot, fat and round!!!;
     <a href="assets/token/chg_xianyu_for_qq.php" >仙玉chg</a><br/>
     <a href="assets/token/stock_info_for_qq.php" >仙玉拍卖（寄售）</a><br/>
     <a href="assets/token/ah.php" >寄售行</a><br/>
+    <a href="assets/token/payback.php" >理财道具</a><br/>
 </p>
 <p>
     <b>联盟<br/></b>
     <a href="assets/league/league.php" >联盟各种</a><br/>
 </p>
 <p>
-    <b>怪物,NPC,boss,ogre<br/></b>
+    <b>怪物,NPC,boss,ogre,pet<br/></b>
     <a href="assets/npc/ogre_dead_info_for_qq.php" >怪物,ogre</a><br/>
     <a href="assets/npc/dead_boss.php" >怪物,boss</a><br/>
     <a href="assets/npc/char_pet_recover_for_qq.php" >删除宠物，恢复宠物，宠物蛋的开启</a><br/>
@@ -62,11 +63,11 @@ i am a teapot, fat and round!!!;
     <b>奖励,award_list<br/></b>
     <a href="assets/award/player_award.php" >player_award</a><br/>
 </p>
-
 <p>
     <b>功能类<br/></b>
     <a href="#" >gm指令</a><br/>
     <a href="assets/exportchar/exportcha.php" >导号</a><br/>
+    <a href="assets/flag/flag.php" >标志位</a><br/>
 </p>
 <p>
     <b>tmp<br/></b>

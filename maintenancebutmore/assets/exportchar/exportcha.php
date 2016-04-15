@@ -51,6 +51,9 @@ if("" !=  @$_POST["cfg"])
     //echo $cfg->to_string();
     $obj = new mymailer_SMTP($cfg);
     $obj->SendMail();
+    echo("<p>");
+    echo("<a href=".$header_consts_index_url.">返回</a>");
+    echo("</p>");
 
     //TODO： charid sql生成器？
 }
@@ -91,7 +94,7 @@ else
                 laydate(start);
                 laydate(end);
             </script>
-            area_id:     <select name="area_id"><?php auto_fill_option() ?></select>
+            area_id:     <select name="area_id"><?php auto_fill_option($arr_area) ?></select>
 
             char_name:   <input type="text" name="char_name"><br/>
             cfg:         <input type="text" name="cfg"><br/>

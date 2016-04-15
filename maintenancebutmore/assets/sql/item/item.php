@@ -500,6 +500,50 @@ function make_sql_gzs_ah_deal($datetime1,$datetime2, $acct, $char_name, $only_id
 
     return $sql;
 }
+function   make_sql_pay_back_item_add_for_qq($datetime1,$datetime2, $acct, $char_name, $excel_id,$table_name)
+{
+    $sql="select * from ".$table_name." where log_datetime between '"
+        .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and acct_name in(".$acct.")";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and char_name in(".$tmp_str.")";
+    }
+    if($excel_id != "")
+    {
+        $tmp_str = wrap_digital($excel_id);
+        $sql.=" and excel_id in(".$tmp_str.")";
+    }
+    $sql.=";";
+
+    return $sql;
+}
+function   make_sql_pay_back_point_add_for_qq($datetime1,$datetime2, $acct, $char_name, $excel_id,$table_name)
+{
+    $sql="select * from ".$table_name." where log_datetime between '"
+        .$datetime1."' and '".$datetime2."'";
+    if($acct != "")
+    {
+        $sql.=" and acct_name in(".$acct.")";
+    }
+    if($char_name != "")
+    {
+        $tmp_str=wrap_str($char_name);
+        $sql.=" and char_name in(".$tmp_str.")";
+    }
+    if($excel_id != "")
+    {
+        $tmp_str = wrap_digital($excel_id);
+        $sql.=" and excel_id in(".$tmp_str.")";
+    }
+    $sql.=";";
+
+    return $sql;
+}
 //league查询
 function make_sql_common_characters_by_charname($char_name)
 {
@@ -776,4 +820,29 @@ function make_sql_player_award($datetime1,$datetime2,$acct,$char_name,$award_id,
     $sql.=";";
     return $sql;
 
+}
+//flag，标志位
+function make_sql_flag($table_name,$filed_name,$flag_type,$flag_id,$filter_filed_name,$filter_filed_value,$is_compressed)
+{
+    $sql="select ".$filter_filed_name.",";
+    $compress="";
+    if($is_compressed == 1)
+        $compress = "uncompress";
+    switch ($flag_type) {
+        case "bit":
+            break;
+        case "qbit":
+            break;
+        case "byte":
+            break;
+        case "word":
+            break;
+        case "dword":
+            break;
+        case "qword":
+            break;
+        default:
+            log_err("bad flag_type", debug_err);
+            break;
+    }
 }
